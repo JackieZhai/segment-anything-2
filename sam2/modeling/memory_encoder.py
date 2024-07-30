@@ -168,9 +168,6 @@ class MemoryEncoder(nn.Module):
         masks = self.mask_downsampler(masks)
 
         ## Fuse pix_feats and downsampled masks
-        # in case the visual features are on CPU, cast them to CUDA
-        pix_feat = pix_feat.to(masks.device)
-
         x = self.pix_feat_proj(pix_feat)
         x = x + masks
         x = self.fuser(x)
